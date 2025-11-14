@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36310.24 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tick_Data_Parser_Analyzer", "Tick_Data_Parser_Analyzer\Tick_Data_Parser_Analyzer.vcxproj", "{7A81B723-78F3-485A-B52C-D2124CA9ADD7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7A81B723-78F3-485A-B52C-D2124CA9ADD7}.Debug|x64.ActiveCfg = Debug|x64
+		{7A81B723-78F3-485A-B52C-D2124CA9ADD7}.Debug|x64.Build.0 = Debug|x64
+		{7A81B723-78F3-485A-B52C-D2124CA9ADD7}.Debug|x86.ActiveCfg = Debug|Win32
+		{7A81B723-78F3-485A-B52C-D2124CA9ADD7}.Debug|x86.Build.0 = Debug|Win32
+		{7A81B723-78F3-485A-B52C-D2124CA9ADD7}.Release|x64.ActiveCfg = Release|x64
+		{7A81B723-78F3-485A-B52C-D2124CA9ADD7}.Release|x64.Build.0 = Release|x64
+		{7A81B723-78F3-485A-B52C-D2124CA9ADD7}.Release|x86.ActiveCfg = Release|Win32
+		{7A81B723-78F3-485A-B52C-D2124CA9ADD7}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D76447D0-4C7D-41FF-B2D8-47DD8D5D1F44}
+	EndGlobalSection
+EndGlobal
