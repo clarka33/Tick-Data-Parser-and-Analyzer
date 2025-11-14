@@ -11,7 +11,7 @@
 class Tick {
 public:
     time_t timeStamp;
-    float price, volume;
+    double price, volume;
 
     void setTimeStamp(std::string x) {
         long long unixTimeStamp = std::stoll(x);
@@ -21,25 +21,25 @@ public:
     }
 
     void setPrice(std::string x) {
-        price = std::stof(x);
+        price = std::stod(x);
     }
 
     void setVolume(std::string x) {
-        volume = std::stof(x);
+        volume = std::stod(x);
     }
 
     time_t getTimeStamp() {
         return timeStamp;
     }
 
-    float getPrice(){
+    double getPrice() {
         return price;
     }
 
-    float getVolume() {
+    double getVolume() {
         return volume;
     }
-        
+
 };
 
 //PARSE EACH CSV LINE FROM FILE
@@ -94,14 +94,14 @@ std::vector<std::vector<std::string>> readCSV(const std::string& filename) {
 }
 
 //CONVERT FILE INFORMATION INTO TICKER OBJECTS
-std::vector<Tick> gatherTickData(const std::vector<std::vector<std::string>> &csvData) {
+std::vector<Tick> gatherTickData(const std::vector<std::vector<std::string>>& csvData) {
     std::vector<Tick> results;
     Tick tempTick;
 
     for (const auto& row : csvData) {
         tempTick.setTimeStamp(row[0]);
         tempTick.setPrice(row[4]);
-        tempTick.setVolume(row[6]);
+        tempTick.setVolume(row[5]);
 
         results.push_back(tempTick);
     }
@@ -110,19 +110,19 @@ std::vector<Tick> gatherTickData(const std::vector<std::vector<std::string>> &cs
 }
 
 //GET MEAN VALUE OF SPECIFIED DATA TYPE
-float getMean(std::vector<Tick> results, std::string dataType) {
-    float sum;
+double getMean(std::vector<Tick> results, std::string dataType) {
+    double sum;
     sum = 0;
 
 
     if (dataType == "Price") {
         for (Tick& record : results) {
-            sum =+ record.getPrice();
+            sum += record.getPrice();
         }
     }
     else if (dataType == "Volume") {
         for (Tick& record : results) {
-            sum =+ record.getVolume();
+            sum += record.getVolume();
         }
     }
     else {
@@ -134,8 +134,8 @@ float getMean(std::vector<Tick> results, std::string dataType) {
 }
 
 //GET VARIANCE VALUE OF SPECIFIED DATA TYPE
-float getVariance(std::vector<Tick> results, std::string dataType) {
-    float sum, mean, output;
+double getVariance(std::vector<Tick> results, std::string dataType) {
+    double sum, mean, output;
 
     sum = 0;
     mean = -1;
@@ -150,13 +150,13 @@ float getVariance(std::vector<Tick> results, std::string dataType) {
     if (dataType == "Price") {
 
         for (Tick& record : results) {
-            sum += pow((record.getPrice() - mean),2);
+            sum += pow((record.getPrice() - mean), 2);
         }
 
     }
     else if (dataType == "Volume") {
         for (Tick& record : results) {
-            sum =+ pow((record.getVolume() - mean), 2);
+            sum += pow((record.getVolume() - mean), 2);
         }
     }
     else {
@@ -169,8 +169,8 @@ float getVariance(std::vector<Tick> results, std::string dataType) {
 }
 
 //GET MIN VALUE OF SPECIFIED DATA TYPE
-float getMin(std::vector<Tick> results, std::string dataType) {
-    float min;
+double getMin(std::vector<Tick> results, std::string dataType) {
+    double min;
 
     if (dataType == "Price") {
         min = results.front().getPrice();
@@ -198,8 +198,8 @@ float getMin(std::vector<Tick> results, std::string dataType) {
 }
 
 //GET MAX VALUE OF SPECIFIED DATA TYPE
-float getMax(std::vector<Tick> results, std::string dataType) {
-    float max;
+double getMax(std::vector<Tick> results, std::string dataType) {
+    double max;
 
     if (dataType == "Price") {
         max = results.front().getPrice();
@@ -229,8 +229,8 @@ float getMax(std::vector<Tick> results, std::string dataType) {
 //DISPLAY STATISTIC INFORMATION
 void statistics(std::vector<Tick> results, std::string dataType) {
 
-    float mean, variance, min, max;
-    
+    double mean, variance, min, max;
+
     if (dataType == "Price" || dataType == "Volume") {
         mean = getMean(results, dataType);
         variance = getVariance(results, dataType);
@@ -252,16 +252,16 @@ void statistics(std::vector<Tick> results, std::string dataType) {
 int main()
 {
     try {
-        
+
         auto start = std::chrono::high_resolution_clock::now(); //START TIMER
 
         //INIT VARIABLES
         std::string filename;
         std::vector<Tick> results;
-        float mean, variance, min, max;
+        double mean, variance, min, max;
 
 
-        filename = "..../Tick_Data_Parser_Analyzer/FX_EURUSD_60.csv"; //INSERT WHERE FILE IS SAVED
+        filename = "../repos/Tick_Data_Parser_Analyzer/FX_EURUSD_60.csv"; //INSERT WHERE FILE IS SAVED
 
         std::vector<std::vector<std::string>> csvData = readCSV(filename); //LOAD FILE INFO INTO VECTOR
 
@@ -276,8 +276,8 @@ int main()
         //PRINT RUN TIME INFOMATION
         std::chrono::duration<double> elapsed = end - start;
         std::cout << "Runtime: " << elapsed.count() << " seconds\n";
-        
-        
+
+
     }
     catch (const std::exception& e) {
         std::cerr << e.what() << "\n";
@@ -288,4 +288,3 @@ int main()
 }
 
 //time,open,high,low,close,Volume,K,D,ATR
-
